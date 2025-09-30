@@ -17,6 +17,7 @@ var tableUpgrades: Array[Upgrades] = []
 var roundIndex: int = 0
 var shotgunShellCount: int = 8 # some logic based on round index
 var maxHP: int = 3 # temporary value
+# need to also create a power variable, where when shot, hp -= power (for handsaw)
 
 # Game Logic functions
 func initMatch() -> void:
@@ -85,7 +86,7 @@ func useBeer(callerPlayerRef: Player) -> void:
 	pass
 
 func useMagGlass(callerPlayerRef: Player) -> void:
-	pass
+	print(shotgunShells[0]) # replace with animation 
 
 func useHandcuff(callerPlayerRef: Player, targetPlayerRef: player) -> void:
 	pass
@@ -94,10 +95,19 @@ func useUnoRev(callerPlayerRef: Player, targetPlayerRef: player) -> void:
 	pass
 
 func useExpiredMed(callerPlayerRef: Player) -> void:
-	pass
+	if randi()%2:
+		callerPlayerRef.hp += 2
+		if callerPlayerRef.hp >= maxHP:
+			callerPlayerRef.hp = maxHP
+	else:
+		callerPlayerRef.hp -= 1
 
 func useInverter(callerPlayerRef: Player) -> void:
-	pass
+	for i in range(shotgunShells.size()):
+		if shotgunShells[i] == 0:
+			shotgunShells[i] = 1
+		else:
+			shotgunShells[i] = 0
 
 func useBurnerPhone(callerPlayerRef: Player) -> void:
 	pass
