@@ -1,19 +1,11 @@
 extends Node
 
-class GameState:
-	var alivePlayers: Array[Player]
-	var upgradesOnTable: Array[Upgrade]
-
-	func _init(_alivePlayers: Array, _upgradesOnTable: Array):
-		alivePlayers = _alivePlayers
-		upgradesOnTable = _upgradesOnTable
-		
-# TODO: make the Player class please and Upgrade too
+# Initializing the game state
 var gameState: GameState = GameState.new([], [])
 var players: Array[Player] = []
 var currPlayerTurnIndex: int = 0 
 var shotgunShells: Array[int] = [] # 0 for blank, 1 for live
-var tableUpgrades: Array[Upgrades] = []
+var tableUpgrades: Array[Upgrade] = []
 var roundIndex: int = 0
 var shotgunShellCount: int = 8 # some logic based on round index
 var maxHP: int = 3 # temporary value
@@ -31,7 +23,7 @@ func endTurn() -> void:
 	currPlayerTurnIndex += 1
 
 func checkWin() -> bool:
-	return alivePlayers.size() == 1
+	return gameState.alivePlayers.size() == 1
 
 func generateRandomBullets():
 	shotgunShells.clear()
@@ -42,6 +34,7 @@ func generateRandomBullets():
 # Below are all functions that are player facing, call these when designing players for player devs
 func endGame() -> void:
 	return
+
 func getGameState() -> GameState:
 	return gameState
 
@@ -54,7 +47,7 @@ func shootPlayer(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 # call this when you want to pick an upgrade off of the upgrade table
 # returns true if succesffuly picked up
 # otherwise returns false
-func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> boolean:
+func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> bool:
 	# im guessing i need to include logic in the scene to actually add and remove upgrades from the table visually
 	var gotUpgrade: bool = false
 	var upIndex: int = -1
@@ -64,7 +57,7 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> boolean:
 			upIndex = i
 	if gotUpgrade:
 		callerPlayerRef.addInventory(upgradeRef)
-		tableUpgrades.pop_at(i)
+		tableUpgrades.pop_at(upIndex)
 	else:
 		return false
 	return true
@@ -106,10 +99,10 @@ func useBeer(callerPlayerRef: Player) -> void:
 func useMagGlass(callerPlayerRef: Player) -> void:
 	print(shotgunShells[0]) # replace with animation 
 
-func useHandcuff(callerPlayerRef: Player, targetPlayerRef: player) -> void:
+func useHandcuff(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
 
-func useUnoRev(callerPlayerRef: Player, targetPlayerRef: player) -> void:
+func useUnoRev(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
 
 func useExpiredMed(callerPlayerRef: Player) -> void:
