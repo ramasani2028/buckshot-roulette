@@ -39,9 +39,8 @@ func getAlivePlayers() -> Array[Player]:
 func getAllPlayers() -> Array[Player]:
 	
 
-# TODO: make upgrade class please
 func getUpgradesOnTheTable() -> Array[Upgrade]:
-	
+	return tableUpgrades
 
 func shootPlayer(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	# logic for shooting
@@ -51,7 +50,7 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> void:
 	
 
 func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player = null) -> void:
-	# verify if its in inventory
+	# verify whether upgrade is in caller's inventory
 	
 	match upgradeRef.upgrade_type:
 		Upgrade.UpgradeType.cigarette:
