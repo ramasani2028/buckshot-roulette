@@ -14,13 +14,15 @@ var players: Array[Player] = []
 var currPlayerTurnIndex: int = 0 
 var shotgunShells: Array[int] = [] # 0 for blank, 1 for live
 var tableUpgrades: Array[Upgrades] = []
-var roundIndex: int = 0;
-var shotgunShellCount: int = 8; # some logic based on round index
+var roundIndex: int = 0
+var shotgunShellCount: int = 8 # some logic based on round index
+var maxHP: int = 3 # temporary value
+# TODO: create a power variable, where when shot, hp -= power (for handsaw)
 
 # Game Logic functions
 func initMatch() -> void:
 	roundIndex = 0
-	shotgunShellCount = 8;
+	shotgunShellCount = 8
 
 func initRound() -> void:
 	currPlayerTurnIndex = 0
@@ -29,7 +31,7 @@ func endTurn() -> void:
 	currPlayerTurnIndex += 1
 
 func checkWin() -> bool:
-	return alivePlayers.size() == 1;
+  return alivePlayers.size() == 1
 
 func generateRandomBullets():
 	shotgunShells.clear()
@@ -67,7 +69,69 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> boolean:
 		return false
 	return true
 
-func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player) -> void:
+func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player = null) -> void:
+	# TODO: verify whether upgrade is in caller's inventory
 	
+	match upgradeRef.upgrade_type:
+		Upgrade.UpgradeType.cigarette:
+			useCigarette(callerPlayerRef)
+		Upgrade.UpgradeType.beer:
+			useBeer(callerPlayerRef)
+		Upgrade.UpgradeType.magGlass:
+			useMagGlass(callerPlayerRef)
+		Upgrade.UpgradeType.handcuff:
+			useHandcuff(callerPlayerRef, targetPlayerRef)
+		Upgrade.UpgradeType.unoRev:
+			useUnoRev(callerPlayerRef, targetPlayerRef)
+		Upgrade.UpgradeType.expiredMed:
+			useExpiredMed(callerPlayerRef)
+		Upgrade.UpgradeType.inverter:
+			useInverter(callerPlayerRef)
+		Upgrade.UpgradeType.burnerPhone:
+			useBurnerPhone(callerPlayerRef)
+		Upgrade.UpgradeType.adrenaline:
+			useAdrenaline(callerPlayerRef, targetPlayerRef)
+		Upgrade.UpgradeType.handSaw:
+			useHandSaw(callerPlayerRef)
+		
+		# TODO: Remove from player inventory
 
-# Upgrade devs fill out the space below with your upgrade logics
+func useCigarette(callerPlayerRef: Player) -> void:
+	if callerPlayerRef.hp < maxHP:
+		callerPlayerRef.hp += 1
+
+func useBeer(callerPlayerRef: Player) -> void:
+	pass
+
+func useMagGlass(callerPlayerRef: Player) -> void:
+	print(shotgunShells[0]) # replace with animation 
+
+func useHandcuff(callerPlayerRef: Player, targetPlayerRef: player) -> void:
+	pass
+
+func useUnoRev(callerPlayerRef: Player, targetPlayerRef: player) -> void:
+	pass
+
+func useExpiredMed(callerPlayerRef: Player) -> void:
+	if randi()%2:
+		callerPlayerRef.hp += 2
+		if callerPlayerRef.hp >= maxHP:
+			callerPlayerRef.hp = maxHP
+	else:
+		callerPlayerRef.hp -= 1
+
+func useInverter(callerPlayerRef: Player) -> void:
+	for i in range(shotgunShells.size()):
+		if shotgunShells[i] == 0:
+			shotgunShells[i] = 1
+		else:
+			shotgunShells[i] = 0
+
+func useBurnerPhone(callerPlayerRef: Player) -> void:
+	pass
+	
+func useAdrenaline(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
+	pass
+	
+func useHandSaw(callerPlayerRef: Player) -> void:
+	pass
