@@ -14,13 +14,13 @@ var players: Array[Player] = []
 var currPlayerTurnIndex: int = 0 
 var shotgunShells: Array[int] = []
 var tableUpgrades: Array[Upgrades] = []
-var roundIndex: int = 0;
-var shotgunShellCount: int = 8; # some logic based on round index
+var roundIndex: int = 0
+var shotgunShellCount: int = 8 # some logic based on round index
 
 # Game Logic functions
 func initMatch() -> void:
 	roundIndex = 0
-	shotgunShellCount = 8;
+	shotgunShellCount = 8
 
 func initRound() -> void:
 	currPlayerTurnIndex = 1
@@ -29,7 +29,7 @@ func endTurn() -> void:
 	currPlayerTurnIndex += 1
 
 func checkWin() -> bool:
-	return alivePlayers.size() == 1;
+	return alivePlayers.size() == 1
 
 
 # Below are all functions that are player facing, call these when designing players for player devs
@@ -51,7 +51,31 @@ func shootPlayer(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> void:
 	
 
-func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player) -> void:
+func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player = null) -> void:
+	# verify if its in inventory
 	
-
-# Upgrade devs fill out the space below with your upgrade logics
+	match upgradeRef.upgrade_type:
+		Upgrade.UpgradeType.cigarette:
+			useCigarette(callerPlayerRef)
+		Upgrade.UpgradeType.beer:
+			useBeer(callerPlayerRef)
+		Upgrade.UpgradeType.magGlass:
+			useMagGlass(callerPlayerRef)
+		Upgrade.UpgradeType.handcuff:
+			useHandcuff(callerPlayerRef, targetPlayerRef)
+		Upgrade.UpgradeType.unoRev:
+			useUnoRev(callerPlayerRef, targetPlayerRef)
+		Upgrade.UpgradeType.expiredMed:
+			useExpiredMed(callerPlayerRef)
+		Upgrade.UpgradeType.inverter:
+			useInverter(callerPlayerRef)
+		Upgrade.UpgradeType.burnerPhone:
+			useBurnerPhone(callerPlayerRef)
+		Upgrade.UpgradeType.adrenaline:
+			useAdrenaline(callerPlayerRef, targetPlayerRef)
+		Upgrade.UpgradeType.handSaw:
+			useHandSaw(callerPlayerRef)
+			
+func useCigarette(callerPlayerRef: Player) -> void:
+	callerPlayerRef.hp += 1
+			

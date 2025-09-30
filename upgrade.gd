@@ -1,4 +1,9 @@
 class_name Upgrade extends Node
 
-enum Upgrades {cigarette, beer, magGlass, handcuff, unoRev, wildCard,
+enum upgradeType {cigarette, beer, magGlass, handcuff, unoRev, wildCard,
  			   disableUpgrade, expiredMed, inverter, burnerPhone, adrenaline, handSaw}
+
+var upgrade_type: upgradeType
+
+func _init(type: upgradeType):
+	upgrade_type = type
