@@ -31,7 +31,6 @@ func endTurn() -> void:
 func checkWin() -> bool:
 	return alivePlayers.size() == 1
 
-
 # Below are all functions that are player facing, call these when designing players for player devs
 func getGameState() -> void:
 	
@@ -75,7 +74,35 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 			useAdrenaline(callerPlayerRef, targetPlayerRef)
 		Upgrade.UpgradeType.handSaw:
 			useHandSaw(callerPlayerRef)
-			
+		
+		# Remove from player inventory
+
 func useCigarette(callerPlayerRef: Player) -> void:
 	callerPlayerRef.hp += 1
-			
+
+func useBeer(callerPlayerRef: Player) -> void:
+	pass
+
+func useMagGlass(callerPlayerRef: Player) -> void:
+	pass
+
+func useHandcuff(callerPlayerRef: Player, targetPlayerRef: player) -> void:
+	pass
+
+func useUnoRev(callerPlayerRef: Player, targetPlayerRef: player) -> void:
+	pass
+
+func useExpiredMed(callerPlayerRef: Player) -> void:
+	pass
+
+func useInverter(callerPlayerRef: Player) -> void:
+	pass
+
+func useBurnerPhone(callerPlayerRef: Player) -> void:
+	pass
+	
+func useAdrenaline(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
+	pass
+	
+func useHandSaw(callerPlayerRef: Player) -> void:
+	pass
