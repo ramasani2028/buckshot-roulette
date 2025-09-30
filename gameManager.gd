@@ -31,7 +31,7 @@ func endTurn() -> void:
 	currPlayerTurnIndex += 1
 
 func checkWin() -> bool:
-  return alivePlayers.size() == 1
+	return alivePlayers.size() == 1
 
 func generateRandomBullets():
 	shotgunShells.clear()
