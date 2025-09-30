@@ -14,6 +14,6 @@ var shotgunShellCount: int = 8 # some logic based on round index
 var maxHP: int = 3 # temporary value
 # TODO: create a power variable, where when shot, hp -= power (for handsaw)
 
-func _init(_alivePlayers: Array, _upgradesOnTable: Array):
+func _init(_alivePlayers: Array[Player], _upgradesOnTable: Array[Upgrade]):
 	alivePlayers = _alivePlayers
 	upgradesOnTable = _upgradesOnTable
