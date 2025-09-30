@@ -17,7 +17,7 @@ var tableUpgrades: Array[Upgrades] = []
 var roundIndex: int = 0
 var shotgunShellCount: int = 8 # some logic based on round index
 var maxHP: int = 3 # temporary value
-# need to also create a power variable, where when shot, hp -= power (for handsaw)
+# TODO: create a power variable, where when shot, hp -= power (for handsaw)
 
 # Game Logic functions
 func initMatch() -> void:
@@ -52,7 +52,7 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> void:
 	
 
 func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player = null) -> void:
-	# verify whether upgrade is in caller's inventory
+	# TODO: verify whether upgrade is in caller's inventory
 	
 	match upgradeRef.upgrade_type:
 		Upgrade.UpgradeType.cigarette:
@@ -76,7 +76,7 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 		Upgrade.UpgradeType.handSaw:
 			useHandSaw(callerPlayerRef)
 		
-		# Remove from player inventory
+		# TODO: Remove from player inventory
 
 func useCigarette(callerPlayerRef: Player) -> void:
 	if callerPlayerRef.hp < maxHP:
