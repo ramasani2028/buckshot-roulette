@@ -2,30 +2,39 @@ extends Node
 
 # Initializing the game state
 var gameState: GameState = GameState.new([], [])
+var players: Array[Player] = []
+var currPlayerTurnIndex: int = 0 
+var shotgunShells: Array[int] = [] # 0 for blank, 1 for live
+var tableUpgrades: Array[Upgrade] = []
+var roundIndex: int = 0
+var shotgunShellCount: int = 8 # some logic based on round index
+var maxHP: int = 3 # temporary value
+# TODO: create a power variable, where when shot, hp -= power (for handsaw)
 
 # Game Logic functions
 func initMatch() -> void:
-	gameState.roundIndex = 0
-	gameState.shotgunShellCount = 8
+	roundIndex = 0
+	shotgunShellCount = 8
 
 func initRound() -> void:
-	gameState.currPlayerTurnIndex = 0
+	currPlayerTurnIndex = 0
 
 func endTurn() -> void:
-	gameState.currPlayerTurnIndex += 1
+	currPlayerTurnIndex += 1
 
 func checkWin() -> bool:
 	return gameState.alivePlayers.size() == 1
 
 func generateRandomBullets():
-	gameState.shotgunShells.clear()
-	for i in range(gameState.shotgunShellCount):
+	shotgunShells.clear()
+	for i in range(shotgunShellCount):
 		var shell = randi() % 2  
-		gameState.shotgunShells[i] = shell
+		shotgunShells[i] = shell
 
 # Below are all functions that are player facing, call these when designing players for player devs
 func endGame() -> void:
 	return
+
 func getGameState() -> GameState:
 	return gameState
 
@@ -42,13 +51,13 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> bool:
 	# im guessing i need to include logic in the scene to actually add and remove upgrades from the table visually
 	var gotUpgrade: bool = false
 	var upIndex: int = -1
-	for i in gameState.tableUpgrades.size():
-		if upgradeRef == gameState.tableUpgrades[i]:
+	for i in tableUpgrades.size():
+		if upgradeRef == tableUpgrades[i]:
 			gotUpgrade = true
 			upIndex = i
 	if gotUpgrade:
 		callerPlayerRef.addInventory(upgradeRef)
-		gameState.tableUpgrades.pop_at(upIndex)
+		tableUpgrades.pop_at(upIndex)
 	else:
 		return false
 	return true
@@ -81,14 +90,14 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 		# TODO: Remove from player inventory
 
 func useCigarette(callerPlayerRef: Player) -> void:
-	if callerPlayerRef.hp < gameState.maxHP:
+	if callerPlayerRef.hp < maxHP:
 		callerPlayerRef.hp += 1
 
 func useBeer(callerPlayerRef: Player) -> void:
 	pass
 
 func useMagGlass(callerPlayerRef: Player) -> void:
-	print(gameState.shotgunShells[0]) # replace with animation 
+	print(shotgunShells[0]) # replace with animation 
 
 func useHandcuff(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
@@ -99,17 +108,17 @@ func useUnoRev(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 func useExpiredMed(callerPlayerRef: Player) -> void:
 	if randi()%2:
 		callerPlayerRef.hp += 2
-		if callerPlayerRef.hp >= gameState.maxHP:
-			callerPlayerRef.hp = gameState.maxHP
+		if callerPlayerRef.hp >= maxHP:
+			callerPlayerRef.hp = maxHP
 	else:
 		callerPlayerRef.hp -= 1
 
 func useInverter(callerPlayerRef: Player) -> void:
-	for i in range(gameState.shotgunShells.size()):
-		if gameState.shotgunShells[i] == 0:
-			gameState.shotgunShells[i] = 1
+	for i in range(shotgunShells.size()):
+		if shotgunShells[i] == 0:
+			shotgunShells[i] = 1
 		else:
-			gameState.shotgunShells[i] = 0
+			shotgunShells[i] = 0
 
 func useBurnerPhone(callerPlayerRef: Player) -> void:
 	pass
