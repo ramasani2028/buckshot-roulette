@@ -1,43 +1,27 @@
 extends Node
 
-class GameState:
-	var alivePlayers: Array[Player]
-	var upgradesOnTable: Array[Upgrade]
-
-	func _init(_alivePlayers: Array, _upgradesOnTable: Array):
-		alivePlayers = _alivePlayers
-		upgradesOnTable = _upgradesOnTable
-		
-# TODO: make the Player class please and Upgrade too
+# Initializing the game state
 var gameState: GameState = GameState.new([], [])
-var players: Array[Player] = []
-var currPlayerTurnIndex: int = 0 
-var shotgunShells: Array[int] = [] # 0 for blank, 1 for live
-var tableUpgrades: Array[Upgrades] = []
-var roundIndex: int = 0
-var shotgunShellCount: int = 8 # some logic based on round index
-var maxHP: int = 3 # temporary value
-# TODO: create a power variable, where when shot, hp -= power (for handsaw)
 
 # Game Logic functions
 func initMatch() -> void:
-	roundIndex = 0
-	shotgunShellCount = 8
+	gameState.roundIndex = 0
+	gameState.shotgunShellCount = 8
 
 func initRound() -> void:
-	currPlayerTurnIndex = 0
+	gameState.currPlayerTurnIndex = 0
 
 func endTurn() -> void:
-	currPlayerTurnIndex += 1
+	gameState.currPlayerTurnIndex += 1
 
 func checkWin() -> bool:
-	return alivePlayers.size() == 1
+	return gameState.alivePlayers.size() == 1
 
 func generateRandomBullets():
-	shotgunShells.clear()
-	for i in range(shotgunShellCount):
+	gameState.shotgunShells.clear()
+	for i in range(gameState.shotgunShellCount):
 		var shell = randi() % 2  
-		shotgunShells[i] = shell
+		gameState.shotgunShells[i] = shell
 
 # Below are all functions that are player facing, call these when designing players for player devs
 func endGame() -> void:
@@ -54,17 +38,17 @@ func shootPlayer(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 # call this when you want to pick an upgrade off of the upgrade table
 # returns true if succesffuly picked up
 # otherwise returns false
-func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> boolean:
+func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> bool:
 	# im guessing i need to include logic in the scene to actually add and remove upgrades from the table visually
 	var gotUpgrade: bool = false
 	var upIndex: int = -1
-	for i in tableUpgrades.size():
-		if upgradeRef == tableUpgrades[i]:
+	for i in gameState.tableUpgrades.size():
+		if upgradeRef == gameState.tableUpgrades[i]:
 			gotUpgrade = true
 			upIndex = i
 	if gotUpgrade:
 		callerPlayerRef.addInventory(upgradeRef)
-		tableUpgrades.pop_at(i)
+		gameState.tableUpgrades.pop_at(upIndex)
 	else:
 		return false
 	return true
@@ -97,35 +81,35 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 		# TODO: Remove from player inventory
 
 func useCigarette(callerPlayerRef: Player) -> void:
-	if callerPlayerRef.hp < maxHP:
+	if callerPlayerRef.hp < gameState.maxHP:
 		callerPlayerRef.hp += 1
 
 func useBeer(callerPlayerRef: Player) -> void:
 	pass
 
 func useMagGlass(callerPlayerRef: Player) -> void:
-	print(shotgunShells[0]) # replace with animation 
+	print(gameState.shotgunShells[0]) # replace with animation 
 
-func useHandcuff(callerPlayerRef: Player, targetPlayerRef: player) -> void:
+func useHandcuff(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
 
-func useUnoRev(callerPlayerRef: Player, targetPlayerRef: player) -> void:
+func useUnoRev(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
 
 func useExpiredMed(callerPlayerRef: Player) -> void:
 	if randi()%2:
 		callerPlayerRef.hp += 2
-		if callerPlayerRef.hp >= maxHP:
-			callerPlayerRef.hp = maxHP
+		if callerPlayerRef.hp >= gameState.maxHP:
+			callerPlayerRef.hp = gameState.maxHP
 	else:
 		callerPlayerRef.hp -= 1
 
 func useInverter(callerPlayerRef: Player) -> void:
-	for i in range(shotgunShells.size()):
-		if shotgunShells[i] == 0:
-			shotgunShells[i] = 1
+	for i in range(gameState.shotgunShells.size()):
+		if gameState.shotgunShells[i] == 0:
+			gameState.shotgunShells[i] = 1
 		else:
-			shotgunShells[i] = 0
+			gameState.shotgunShells[i] = 0
 
 func useBurnerPhone(callerPlayerRef: Player) -> void:
 	pass
