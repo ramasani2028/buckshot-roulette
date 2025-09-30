@@ -16,6 +16,7 @@ var shotgunShells: Array[int] = []
 var tableUpgrades: Array[Upgrades] = []
 var roundIndex: int = 0
 var shotgunShellCount: int = 8 # some logic based on round index
+var maxHP: int = 3 # temporary value
 
 # Game Logic functions
 func initMatch() -> void:
@@ -77,7 +78,8 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 		# Remove from player inventory
 
 func useCigarette(callerPlayerRef: Player) -> void:
-	callerPlayerRef.hp += 1
+	if callerPlayerRef.hp < maxHP:
+		callerPlayerRef.hp += 1
 
 func useBeer(callerPlayerRef: Player) -> void:
 	pass
