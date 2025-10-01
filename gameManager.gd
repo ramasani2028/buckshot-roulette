@@ -5,7 +5,6 @@ var gameState: GameState = GameState.new([], [])
 var players: Array[Player] = []
 var currPlayerTurnIndex: int = 0 
 var shotgunShells: Array[int] = [] # 0 for blank, 1 for live
-var tableUpgrades: Array[Upgrade] = []
 var roundIndex: int = 0
 var shotgunShellCount: int = 8 # some logic based on round index
 var maxHP: int = 3 # temporary value
@@ -51,13 +50,13 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> bool:
 	# im guessing i need to include logic in the scene to actually add and remove upgrades from the table visually
 	var gotUpgrade: bool = false
 	var upIndex: int = -1
-	for i in tableUpgrades.size():
-		if upgradeRef == tableUpgrades[i]:
+	for i in gameState.upgradesOnTable.size():
+		if upgradeRef == gameState.upgradesOnTable[i]:
 			gotUpgrade = true
 			upIndex = i
 	if gotUpgrade:
 		callerPlayerRef.addInventory(upgradeRef)
-		tableUpgrades.pop_at(upIndex)
+		gameState.upgradesOnTable.pop_at(upIndex)
 	else:
 		return false
 	return true
