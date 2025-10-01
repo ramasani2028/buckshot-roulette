@@ -98,7 +98,7 @@ func useBeer(callerPlayerRef: Player) -> void:
 	pass
 
 func useMagGlass(callerPlayerRef: Player) -> void:
-	print(shotgunShells[0]) # replace with animation 
+	print(shotgunShells[0]) # replace with animation for callerPlayerRef
 
 func useHandcuff(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
@@ -119,7 +119,10 @@ func useInverter() -> void: # no parameter since caller/target makes no differen
 		shotgunShells[i] ^= 1
 
 func useBurnerPhone(callerPlayerRef: Player) -> void:
-	pass
+	if shotgunShells.size() >= 1:
+		print(shotgunShells[1]) # replace with animation for callerPlayerRef
+	else:
+		print(0) # play animation showing empty shell 
 	
 func useAdrenaline(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
