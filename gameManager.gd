@@ -63,7 +63,8 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> bool:
 	return true
 
 func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player = null) -> void:
-	# TODO: verify whether upgrade is in caller's inventory
+	if upgradeRef not in callerPlayerRef.inventory:
+		return
 	
 	match upgradeRef.upgrade_type:
 		Upgrade.UpgradeType.cigarette:
@@ -87,7 +88,7 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 		Upgrade.UpgradeType.handSaw:
 			useHandSaw(callerPlayerRef)
 		
-		# TODO: Remove from player inventory
+	callerPlayerRef.inventory.erase(upgradeRef)
 
 func useCigarette(callerPlayerRef: Player) -> void:
 	if callerPlayerRef.hp < maxHP:
