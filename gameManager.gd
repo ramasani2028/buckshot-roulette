@@ -115,10 +115,7 @@ func useExpiredMed(callerPlayerRef: Player) -> void:
 
 func useInverter(callerPlayerRef: Player) -> void:
 	for i in range(shotgunShells.size()):
-		if shotgunShells[i] == 0:
-			shotgunShells[i] = 1
-		else:
-			shotgunShells[i] = 0
+		shotgunShells[i] = abs(shotgunShells[i] + -1)
 
 func useBurnerPhone(callerPlayerRef: Player) -> void:
 	pass
