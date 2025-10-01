@@ -128,4 +128,4 @@ func useAdrenaline(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
 	
 func useHandSaw(callerPlayerRef: Player) -> void:
-	pass
+	callerPlayerRef.power = 2 # reset to 1 after shooting please
