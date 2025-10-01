@@ -60,7 +60,7 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> bool:
 	else:
 		return false
 	return true
-
+# TODO: disableUpgrade, handcuff, unoRev and wildCard logic 
 func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player = null) -> void:
 	if upgradeRef not in callerPlayerRef.inventory:
 		return
