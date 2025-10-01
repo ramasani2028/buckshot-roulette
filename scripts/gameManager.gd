@@ -61,6 +61,7 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> bool:
 		return false
 	return true
 # TODO: disableUpgrade, handcuff, adrenaline, unoRev and wildCard logic 
+#		also need to add logic for specific upgrades, e.g. cannot use handsaw when already used (power already 2).
 func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player = null) -> void:
 	if upgradeRef not in callerPlayerRef.inventory:
 		return
