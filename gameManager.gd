@@ -80,7 +80,7 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 		Upgrade.UpgradeType.expiredMed:
 			useExpiredMed(callerPlayerRef)
 		Upgrade.UpgradeType.inverter:
-			useInverter()
+			useInverter(callerPlayerRef)
 		Upgrade.UpgradeType.burnerPhone:
 			useBurnerPhone(callerPlayerRef)
 		Upgrade.UpgradeType.adrenaline:
@@ -114,9 +114,10 @@ func useExpiredMed(callerPlayerRef: Player) -> void:
 	else:
 		callerPlayerRef.hp -= 1
 
-func useInverter() -> void: # no parameter since caller/target makes no difference here
+func useInverter(callerPlayerRef: Player) -> void: 
 	for i in range(shotgunShells.size()):
 		shotgunShells[i] ^= 1
+	# callerPlayerRef isn't needed for the logic, but will need to play animation.
 
 func useBurnerPhone(callerPlayerRef: Player) -> void:
 	if shotgunShells.size() >= 1:
