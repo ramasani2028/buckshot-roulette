@@ -79,7 +79,7 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 		Upgrade.UpgradeType.expiredMed:
 			useExpiredMed(callerPlayerRef)
 		Upgrade.UpgradeType.inverter:
-			useInverter(callerPlayerRef)
+			useInverter()
 		Upgrade.UpgradeType.burnerPhone:
 			useBurnerPhone(callerPlayerRef)
 		Upgrade.UpgradeType.adrenaline:
@@ -113,7 +113,7 @@ func useExpiredMed(callerPlayerRef: Player) -> void:
 	else:
 		callerPlayerRef.hp -= 1
 
-func useInverter(callerPlayerRef: Player) -> void:
+func useInverter() -> void: # no parameter since caller/target makes no difference here
 	for i in range(shotgunShells.size()):
 		shotgunShells[i] = abs(shotgunShells[i] + -1)
 
