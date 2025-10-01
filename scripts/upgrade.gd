@@ -1,7 +1,7 @@
 class_name Upgrade extends Node
 
-enum UpgradeType {cigarette, beer, magGlass, handcuff, unoRev, wildCard,
- 			   disableUpgrade, expiredMed, inverter, burnerPhone, adrenaline, handSaw}
+enum UpgradeType {cigarette, beer, magGlass, handcuff, expiredMed, inverter, 
+				  burnerPhone, adrenaline, handSaw, disableUpgrade, unoRev, wildCard}
 
 var upgrade_type: UpgradeType
 

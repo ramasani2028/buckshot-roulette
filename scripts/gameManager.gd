@@ -86,6 +86,8 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 			useAdrenaline(callerPlayerRef, targetPlayerRef)
 		Upgrade.UpgradeType.handSaw:
 			useHandSaw(callerPlayerRef)
+		#Upgrade.UpgradeType.wildCard:
+		# need to generate upgrade object with random upgrade type (excluding wildCard and unoRev), and call useUpgrade recursively.	
 		
 	callerPlayerRef.inventory.erase(upgradeRef)
 
