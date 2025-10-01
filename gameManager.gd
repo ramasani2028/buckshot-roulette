@@ -5,11 +5,9 @@ var gameState: GameState = GameState.new([], [])
 var players: Array[Player] = []
 var currPlayerTurnIndex: int = 0 
 var shotgunShells: Array[int] = [] # 0 for blank, 1 for live
-var tableUpgrades: Array[Upgrade] = []
 var roundIndex: int = 0
 var shotgunShellCount: int = 8 # some logic based on round index
 var maxHP: int = 3 # temporary value
-# TODO: create a power variable, where when shot, hp -= power (for handsaw)
 
 # Game Logic functions
 func initMatch() -> void:
@@ -40,6 +38,7 @@ func getGameState() -> GameState:
 
 func shootPlayer(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	# logic for shooting
+	# reset callerPlayerRef power to 1 after each shot (handSaw might have been used)
 	if checkWin():
 		endGame()
 	endTurn()
@@ -51,19 +50,20 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> bool:
 	# im guessing i need to include logic in the scene to actually add and remove upgrades from the table visually
 	var gotUpgrade: bool = false
 	var upIndex: int = -1
-	for i in tableUpgrades.size():
-		if upgradeRef == tableUpgrades[i]:
+	for i in gameState.upgradesOnTable.size():
+		if upgradeRef == gameState.upgradesOnTable[i]:
 			gotUpgrade = true
 			upIndex = i
 	if gotUpgrade:
 		callerPlayerRef.addInventory(upgradeRef)
-		tableUpgrades.pop_at(upIndex)
+		gameState.upgradesOnTable.pop_at(upIndex)
 	else:
 		return false
 	return true
 
 func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player = null) -> void:
-	# TODO: verify whether upgrade is in caller's inventory
+	if upgradeRef not in callerPlayerRef.inventory:
+		return
 	
 	match upgradeRef.upgrade_type:
 		Upgrade.UpgradeType.cigarette:
@@ -87,7 +87,7 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 		Upgrade.UpgradeType.handSaw:
 			useHandSaw(callerPlayerRef)
 		
-		# TODO: Remove from player inventory
+	callerPlayerRef.inventory.erase(upgradeRef)
 
 func useCigarette(callerPlayerRef: Player) -> void:
 	if callerPlayerRef.hp < maxHP:
@@ -97,7 +97,7 @@ func useBeer(callerPlayerRef: Player) -> void:
 	pass
 
 func useMagGlass(callerPlayerRef: Player) -> void:
-	print(shotgunShells[0]) # replace with animation 
+	print(shotgunShells[0]) # replace with animation for callerPlayerRef
 
 func useHandcuff(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
@@ -113,18 +113,19 @@ func useExpiredMed(callerPlayerRef: Player) -> void:
 	else:
 		callerPlayerRef.hp -= 1
 
-func useInverter(callerPlayerRef: Player) -> void:
+func useInverter(callerPlayerRef: Player) -> void: 
 	for i in range(shotgunShells.size()):
-		if shotgunShells[i] == 0:
-			shotgunShells[i] = 1
-		else:
-			shotgunShells[i] = 0
+		shotgunShells[i] ^= 1
+	# callerPlayerRef isn't needed for the logic, but will need to play animation.
 
 func useBurnerPhone(callerPlayerRef: Player) -> void:
-	pass
+	if shotgunShells.size() >= 1:
+		print(shotgunShells[1]) # replace with animation for callerPlayerRef
+	else:
+		print(0) # play animation showing empty shell 
 	
 func useAdrenaline(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
 	
 func useHandSaw(callerPlayerRef: Player) -> void:
-	pass
+	callerPlayerRef.power = 2 # reset to 1 after shooting please
