@@ -115,7 +115,7 @@ func useExpiredMed(callerPlayerRef: Player) -> void:
 
 func useInverter() -> void: # no parameter since caller/target makes no difference here
 	for i in range(shotgunShells.size()):
-		shotgunShells[i] = abs(shotgunShells[i] + -1)
+		shotgunShells[i] ^= 1
 
 func useBurnerPhone(callerPlayerRef: Player) -> void:
 	pass
