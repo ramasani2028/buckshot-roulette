@@ -40,6 +40,7 @@ func getGameState() -> GameState:
 
 func shootPlayer(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	# logic for shooting
+	# reset callerPlayerRef power to 1 after each shot (handSaw might have been used)
 	if checkWin():
 		endGame()
 	endTurn()
