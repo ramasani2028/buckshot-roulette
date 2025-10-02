@@ -90,6 +90,8 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 			useAdrenaline(callerPlayerRef, targetPlayerRef)
 		Upgrade.UpgradeType.handSaw:
 			useHandSaw(callerPlayerRef)
+		Upgrade.UpgradeType.disableUpgrade:
+			useDisableUpgrade(callerPlayerRef, targetPlayerRef)
 		Upgrade.UpgradeType.wildCard:
 			# Generating random upgrade from 0-7
 			var newUpgrade = Upgrade.new(Upgrade.UpgradeType.values()[randi() % 8])
@@ -114,9 +116,6 @@ func useHandcuff(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	targetPlayerRef.isHandcuffed = true
 	# set this back to false after turn skipped.
 
-func useUnoRev(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
-	pass
-
 func useExpiredMed(callerPlayerRef: Player) -> void:
 	if randi()%2:
 		callerPlayerRef.hp += 2
@@ -136,8 +135,15 @@ func useBurnerPhone(callerPlayerRef: Player) -> void:
 	else:
 		print(0) # play animation showing empty shell 
 	
+func useHandSaw(callerPlayerRef: Player) -> void:
+	callerPlayerRef.power = 2 # reset to 1 after shooting please
+
+# will implement these upgrades after Prototype 1
 func useAdrenaline(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
 	
-func useHandSaw(callerPlayerRef: Player) -> void:
-	callerPlayerRef.power = 2 # reset to 1 after shooting please
+func useUnoRev(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
+	pass
+
+func useDisableUpgrade(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
+	pass
