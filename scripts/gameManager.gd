@@ -60,7 +60,8 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> bool:
 	else:
 		return false
 	return true
-
+# TODO: disableUpgrade, handcuff, adrenaline, unoRev and wildCard logic 
+#		also need to add logic for specific upgrades, e.g. cannot use handsaw when already used (power already 2).
 func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player = null) -> void:
 	if upgradeRef not in callerPlayerRef.inventory:
 		return
@@ -86,6 +87,8 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 			useAdrenaline(callerPlayerRef, targetPlayerRef)
 		Upgrade.UpgradeType.handSaw:
 			useHandSaw(callerPlayerRef)
+		#Upgrade.UpgradeType.wildCard:
+		# need to generate upgrade object with random upgrade type (excluding wildCard and unoRev), and call useUpgrade recursively.	
 		
 	callerPlayerRef.inventory.erase(upgradeRef)
 
@@ -94,7 +97,10 @@ func useCigarette(callerPlayerRef: Player) -> void:
 		callerPlayerRef.hp += 1
 
 func useBeer(callerPlayerRef: Player) -> void:
-	pass
+	var popped = shotgunShells.pop_front()
+	# Play animation of popped bullet being ejected
+	# also, discuss whether player should still be allowed to shoot if the gun is now empty, knowing
+	# nothing will happen
 
 func useMagGlass(callerPlayerRef: Player) -> void:
 	print(shotgunShells[0]) # replace with animation for callerPlayerRef
