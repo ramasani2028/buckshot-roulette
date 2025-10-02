@@ -6,6 +6,7 @@ class_name Player
 var hp: int
 var inventory: Array = []
 var power: int = 1
+var isHandcuffed: bool = false
 
 func _init(_name: String = "Player", _hp: int = 3):
 	name = _name

@@ -38,7 +38,9 @@ func getGameState() -> GameState:
 
 func shootPlayer(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	# logic for shooting
-	# reset callerPlayerRef power to 1 after each shot (handSaw might have been used)
+	# reset callerPlayerRef power to 1 after each shot (handSaw might have been used)	
+	# also remove handcuff from player after their turn has been skipped (idk where to put this comment)
+	# maybe in endTurn(), keep skipping until it finds a player not handcuffed?
 	if checkWin():
 		endGame()
 	endTurn()
@@ -60,8 +62,8 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> bool:
 	else:
 		return false
 	return true
-# TODO: disableUpgrade, handcuff, adrenaline, unoRev and wildCard logic 
-#		also need to add logic for specific upgrades, e.g. cannot use handsaw when already used (power already 2).
+	
+# TODO: need to add logic for specific upgrades, e.g. cannot use handsaw when already used (power already 2).
 func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player = null) -> void:
 	if upgradeRef not in callerPlayerRef.inventory:
 		return
@@ -87,8 +89,12 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 			useAdrenaline(callerPlayerRef, targetPlayerRef)
 		Upgrade.UpgradeType.handSaw:
 			useHandSaw(callerPlayerRef)
-		#Upgrade.UpgradeType.wildCard:
-		# need to generate upgrade object with random upgrade type (excluding wildCard and unoRev), and call useUpgrade recursively.	
+		Upgrade.UpgradeType.disableUpgrade:
+			useDisableUpgrade(callerPlayerRef, targetPlayerRef)
+		Upgrade.UpgradeType.wildCard:
+			# Generating random upgrade from 0-7
+			var newUpgrade = Upgrade.new(Upgrade.UpgradeType.values()[randi() % 8])
+			useUpgrade(newUpgrade, callerPlayerRef, targetPlayerRef)
 		
 	callerPlayerRef.inventory.erase(upgradeRef)
 
@@ -106,10 +112,8 @@ func useMagGlass(callerPlayerRef: Player) -> void:
 	print(shotgunShells[0]) # replace with animation for callerPlayerRef
 
 func useHandcuff(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
-	pass
-
-func useUnoRev(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
-	pass
+	targetPlayerRef.isHandcuffed = true
+	# set this back to false after turn skipped.
 
 func useExpiredMed(callerPlayerRef: Player) -> void:
 	if randi()%2:
@@ -130,8 +134,15 @@ func useBurnerPhone(callerPlayerRef: Player) -> void:
 	else:
 		print(0) # play animation showing empty shell 
 	
+func useHandSaw(callerPlayerRef: Player) -> void:
+	callerPlayerRef.power = 2 # reset to 1 after shooting please
+
+# will implement these upgrades after Prototype 1
 func useAdrenaline(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
 	
-func useHandSaw(callerPlayerRef: Player) -> void:
-	callerPlayerRef.power = 2 # reset to 1 after shooting please
+func useUnoRev(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
+	pass
+
+func useDisableUpgrade(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
+	pass
