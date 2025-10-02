@@ -109,7 +109,8 @@ func useMagGlass(callerPlayerRef: Player) -> void:
 	print(shotgunShells[0]) # replace with animation for callerPlayerRef
 
 func useHandcuff(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
-	pass
+	targetPlayerRef.isHandcuffed = true
+	# set this back to false after turn skipped.
 
 func useUnoRev(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
