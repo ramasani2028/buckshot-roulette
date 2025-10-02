@@ -60,7 +60,8 @@ func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> bool:
 	else:
 		return false
 	return true
-# TODO: disableUpgrade, handcuff, adrenaline, unoRev and wildCard logic 
+	
+# TODO: disableUpgrade, handcuff, adrenaline and unoRev logic 
 #		also need to add logic for specific upgrades, e.g. cannot use handsaw when already used (power already 2).
 func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: Player = null) -> void:
 	if upgradeRef not in callerPlayerRef.inventory:
@@ -87,8 +88,10 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 			useAdrenaline(callerPlayerRef, targetPlayerRef)
 		Upgrade.UpgradeType.handSaw:
 			useHandSaw(callerPlayerRef)
-		#Upgrade.UpgradeType.wildCard:
-		# need to generate upgrade object with random upgrade type (excluding wildCard and unoRev), and call useUpgrade recursively.	
+		Upgrade.UpgradeType.wildCard:
+			# Generating random upgrade from 0-9
+			var newUpgrade = Upgrade.new(Upgrade.UpgradeType.values()[randi() % 10])
+			useUpgrade(newUpgrade, callerPlayerRef, targetPlayerRef)
 		
 	callerPlayerRef.inventory.erase(upgradeRef)
 
@@ -135,3 +138,4 @@ func useAdrenaline(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	
 func useHandSaw(callerPlayerRef: Player) -> void:
 	callerPlayerRef.power = 2 # reset to 1 after shooting please
+	
