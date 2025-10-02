@@ -38,7 +38,8 @@ func getGameState() -> GameState:
 
 func shootPlayer(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	# logic for shooting
-	# reset callerPlayerRef power to 1 after each shot (handSaw might have been used)
+	# reset callerPlayerRef power to 1 after each shot (handSaw might have been used)	
+	# also remove handcuff from player after their turn has been skipped (idk where to put this comment)
 	if checkWin():
 		endGame()
 	endTurn()
