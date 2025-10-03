@@ -206,6 +206,7 @@ func useBurnerPhone(callerPlayerRef: Player) -> void:
 	
 func useHandSaw(callerPlayerRef: Player) -> void:
 	callerPlayerRef.power = 2 # reset to 1 after shooting please
+	# also need to show gun being sawed off
 
 # will implement these upgrades after Prototype 1
 func useAdrenaline(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
