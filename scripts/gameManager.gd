@@ -25,7 +25,7 @@ func initMatch() -> void:
 
 func initRound() -> void:
 	# figure out a way to randomly generate upgrade scenes and spawn them into the world
-	if roundIndex != 1:
+	if roundIndex != 0:
 		generateRandomUpgrades() # doesnt work yet
 	
 	shotgunShellCount = initShotgunShellCount * (roundIndex + 1) # maybe give this more thought
@@ -33,7 +33,7 @@ func initRound() -> void:
 	realShots = randi() % (shotgunShellCount - minRealShots) + minRealShots
 	blanks = shotgunShellCount - realShots
 	generateRandomBulletsOrder() # aka shuffle
-	if roundIndex != 1:
+	if roundIndex != 0:
 		isUpgradeRnd = true
 	currPlayerTurnIndex = randi() % gameState.alivePlayers.size()
 	
@@ -172,14 +172,13 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 	callerPlayerRef.inventory.erase(upgradeRef)
 
 func useCigarette(callerPlayerRef: Player) -> void:
-	if callerPlayerRef.hp < maxHP:
-		callerPlayerRef.hp += 1
+	callerPlayerRef.heal(1, maxHP)
 
 func useBeer(callerPlayerRef: Player) -> void:
 	var popped = shotgunShells.pop_front()
 	# Play animation of popped bullet being ejected
-	# also, discuss whether player should still be allowed to shoot if the gun is now empty, knowing
-	# nothing will happen
+	if shotgunShells.size() == 0:
+		endTurn()
 
 func useMagGlass(callerPlayerRef: Player) -> void:
 	print(shotgunShells[0]) # replace with animation for callerPlayerRef
@@ -190,11 +189,9 @@ func useHandcuff(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 
 func useExpiredMed(callerPlayerRef: Player) -> void:
 	if randi()%2:
-		callerPlayerRef.hp += 2
-		if callerPlayerRef.hp >= maxHP:
-			callerPlayerRef.hp = maxHP
+		callerPlayerRef.heal(2, maxHP)
 	else:
-		callerPlayerRef.hp -= 1
+		callerPlayerRef.takeDamage(1)
 
 func useInverter(callerPlayerRef: Player) -> void: 
 	for i in range(shotgunShells.size()):
@@ -209,6 +206,7 @@ func useBurnerPhone(callerPlayerRef: Player) -> void:
 	
 func useHandSaw(callerPlayerRef: Player) -> void:
 	callerPlayerRef.power = 2 # reset to 1 after shooting please
+	# also need to show gun being sawed off
 
 # will implement these upgrades after Prototype 1
 func useAdrenaline(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
