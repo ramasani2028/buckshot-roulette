@@ -25,7 +25,7 @@ func initMatch() -> void:
 
 func initRound() -> void:
 	# figure out a way to randomly generate upgrade scenes and spawn them into the world
-	if roundIndex != 1:
+	if roundIndex != 0:
 		generateRandomUpgrades() # doesnt work yet
 	
 	shotgunShellCount = initShotgunShellCount * (roundIndex + 1) # maybe give this more thought
@@ -33,7 +33,7 @@ func initRound() -> void:
 	realShots = randi() % (shotgunShellCount - minRealShots) + minRealShots
 	blanks = shotgunShellCount - realShots
 	generateRandomBulletsOrder() # aka shuffle
-	if roundIndex != 1:
+	if roundIndex != 0:
 		isUpgradeRnd = true
 	currPlayerTurnIndex = randi() % gameState.alivePlayers.size()
 	
