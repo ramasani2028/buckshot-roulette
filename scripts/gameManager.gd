@@ -172,8 +172,7 @@ func useUpgrade(upgradeRef: Upgrade, callerPlayerRef: Player, targetPlayerRef: P
 	callerPlayerRef.inventory.erase(upgradeRef)
 
 func useCigarette(callerPlayerRef: Player) -> void:
-	if callerPlayerRef.hp < maxHP:
-		callerPlayerRef.hp += 1
+	callerPlayerRef.heal(1, maxHP)
 
 func useBeer(callerPlayerRef: Player) -> void:
 	var popped = shotgunShells.pop_front()
@@ -190,11 +189,9 @@ func useHandcuff(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 
 func useExpiredMed(callerPlayerRef: Player) -> void:
 	if randi()%2:
-		callerPlayerRef.hp += 2
-		if callerPlayerRef.hp >= maxHP:
-			callerPlayerRef.hp = maxHP
+		callerPlayerRef.heal(2, maxHP)
 	else:
-		callerPlayerRef.hp -= 1
+		callerPlayerRef.takeDamage(1)
 
 func useInverter(callerPlayerRef: Player) -> void: 
 	for i in range(shotgunShells.size()):
