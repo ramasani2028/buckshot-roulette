@@ -201,7 +201,7 @@ func useBurnerPhone(callerPlayerRef: Player) -> void:
 		print(0) # play animation showing empty shell 
 	
 func useHandSaw(callerPlayerRef: Player) -> void:
-	callerPlayerRef.power = 2
+	callerPlayerRef.power += 1
 	# also need to show gun being sawed off
 
 # will implement these upgrades after Prototype 1
