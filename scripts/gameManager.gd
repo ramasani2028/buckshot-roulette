@@ -177,8 +177,8 @@ func useCigarette(callerPlayerRef: Player) -> void:
 func useBeer(callerPlayerRef: Player) -> void:
 	var popped = shotgunShells.pop_front()
 	# Play animation of popped bullet being ejected
-	# also, discuss whether player should still be allowed to shoot if the gun is now empty, knowing
-	# nothing will happen
+	if shotgunShells.size() == 0:
+		endTurn()
 
 func useMagGlass(callerPlayerRef: Player) -> void:
 	print(shotgunShells[0]) # replace with animation for callerPlayerRef
