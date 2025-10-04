@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cn2o837emvq87"
-path="res://.godot/imported/shotgun_shells__12_gauge_slug_and_buckshot.glb-9beb247fdfd686e9185d062bae82eb3a.scn"
+path="res://.godot/imported/shotgun_shells__12_gauge_slug_and_buckshot.glb-782fdc2df4a5a6500d4bf744a1efa01c.scn"
 
 [deps]
 
-source_file="res://Assets/shotgun_shells__12_gauge_slug_and_buckshot.glb"
-dest_files=["res://.godot/imported/shotgun_shells__12_gauge_slug_and_buckshot.glb-9beb247fdfd686e9185d062bae82eb3a.scn"]
+source_file="res://assets/shotgun_shells__12_gauge_slug_and_buckshot.glb"
+dest_files=["res://.godot/imported/shotgun_shells__12_gauge_slug_and_buckshot.glb-782fdc2df4a5a6500d4bf744a1efa01c.scn"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c1jcsb37rwh4x"
-path.s3tc="res://.godot/imported/buckshot_roulette_table_-_3d_model_0.png-8d322d250afa0a3efc2d3f458d1e76d3.s3tc.ctex"
+path.s3tc="res://.godot/imported/buckshot_roulette_table_-_3d_model_0.png-fbe008fafc63322406f5c106e1b43045.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Assets/buckshot_roulette_table_-_3d_model_0.png"
-dest_files=["res://.godot/imported/buckshot_roulette_table_-_3d_model_0.png-8d322d250afa0a3efc2d3f458d1e76d3.s3tc.ctex"]
+source_file="res://assets/buckshot_roulette_table_-_3d_model_0.png"
+dest_files=["res://.godot/imported/buckshot_roulette_table_-_3d_model_0.png-fbe008fafc63322406f5c106e1b43045.s3tc.ctex"]
 
 [params]
 

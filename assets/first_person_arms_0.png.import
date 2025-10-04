@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://wtqurnpxwb56"
-path.s3tc="res://.godot/imported/first_person_arms_0.png-95de3e36282ddeb5fe02d9e0e6141924.s3tc.ctex"
+path.s3tc="res://.godot/imported/first_person_arms_0.png-785d86dc0e50d0effda0b59bc0f254e0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Assets/first_person_arms_0.png"
-dest_files=["res://.godot/imported/first_person_arms_0.png-95de3e36282ddeb5fe02d9e0e6141924.s3tc.ctex"]
+source_file="res://assets/first_person_arms_0.png"
+dest_files=["res://.godot/imported/first_person_arms_0.png-785d86dc0e50d0effda0b59bc0f254e0.s3tc.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c1v3a8t0xopol"
-path.s3tc="res://.godot/imported/remington_870_shotgun_4.png-7ac009df5f10cf79672c808956d9adf1.s3tc.ctex"
+path.s3tc="res://.godot/imported/remington_870_shotgun_4.png-effd6fa46506b1174cdaad0651e2ceeb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Assets/remington_870_shotgun_4.png"
-dest_files=["res://.godot/imported/remington_870_shotgun_4.png-7ac009df5f10cf79672c808956d9adf1.s3tc.ctex"]
+source_file="res://assets/remington_870_shotgun_4.png"
+dest_files=["res://.godot/imported/remington_870_shotgun_4.png-effd6fa46506b1174cdaad0651e2ceeb.s3tc.ctex"]
 
 [params]
 

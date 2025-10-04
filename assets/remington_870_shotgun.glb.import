@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dsd2085aa7y5v"
-path="res://.godot/imported/remington_870_shotgun.glb-53564166c027576babc6281f16b9d365.scn"
+path="res://.godot/imported/remington_870_shotgun.glb-49ff29e1881ec3ffed2ce3e8e7f82466.scn"
 
 [deps]
 
-source_file="res://Assets/remington_870_shotgun.glb"
-dest_files=["res://.godot/imported/remington_870_shotgun.glb-53564166c027576babc6281f16b9d365.scn"]
+source_file="res://assets/remington_870_shotgun.glb"
+dest_files=["res://.godot/imported/remington_870_shotgun.glb-49ff29e1881ec3ffed2ce3e8e7f82466.scn"]
 
 [params]
 

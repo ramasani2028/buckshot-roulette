@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cqcldyqajw3yc"
-path="res://.godot/imported/buckshot_roulette_table_-_3d_model.glb-dd3ae045891c3ad483663cd27e8ba302.scn"
+path="res://.godot/imported/buckshot_roulette_table_-_3d_model.glb-16c4a1c5a2f465527441f5f8f68643f5.scn"
 
 [deps]
 
-source_file="res://Assets/buckshot_roulette_table_-_3d_model.glb"
-dest_files=["res://.godot/imported/buckshot_roulette_table_-_3d_model.glb-dd3ae045891c3ad483663cd27e8ba302.scn"]
+source_file="res://assets/buckshot_roulette_table_-_3d_model.glb"
+dest_files=["res://.godot/imported/buckshot_roulette_table_-_3d_model.glb-16c4a1c5a2f465527441f5f8f68643f5.scn"]
 
 [params]
 

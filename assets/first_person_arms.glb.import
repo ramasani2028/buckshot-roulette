@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://3oofuonw05r8"
-path="res://.godot/imported/first_person_arms.glb-77f6fa24f194d358813b859f856793f0.scn"
+path="res://.godot/imported/first_person_arms.glb-6c4024e4744cc09de7ba72c74523eb75.scn"
 
 [deps]
 
-source_file="res://Assets/first_person_arms.glb"
-dest_files=["res://.godot/imported/first_person_arms.glb-77f6fa24f194d358813b859f856793f0.scn"]
+source_file="res://assets/first_person_arms.glb"
+dest_files=["res://.godot/imported/first_person_arms.glb-6c4024e4744cc09de7ba72c74523eb75.scn"]
 
 [params]
 

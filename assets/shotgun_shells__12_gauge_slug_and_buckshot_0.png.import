@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://drsvb7exibm76"
-path.s3tc="res://.godot/imported/shotgun_shells__12_gauge_slug_and_buckshot_0.png-6c676d5307cf4ffa530e331668a480d9.s3tc.ctex"
+path.s3tc="res://.godot/imported/shotgun_shells__12_gauge_slug_and_buckshot_0.png-c456d440baaa2de7f0101eaa94941a6e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Assets/shotgun_shells__12_gauge_slug_and_buckshot_0.png"
-dest_files=["res://.godot/imported/shotgun_shells__12_gauge_slug_and_buckshot_0.png-6c676d5307cf4ffa530e331668a480d9.s3tc.ctex"]
+source_file="res://assets/shotgun_shells__12_gauge_slug_and_buckshot_0.png"
+dest_files=["res://.godot/imported/shotgun_shells__12_gauge_slug_and_buckshot_0.png-c456d440baaa2de7f0101eaa94941a6e.s3tc.ctex"]
 
 [params]
 

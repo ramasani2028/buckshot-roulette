@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj53s6w12n7ya"]
+
+[ext_resource type="PackedScene" uid="uid://3oofuonw05r8" path="res://assets/first_person_arms.glb" id="1_3vyb7"]
+
+[node name="Player" type="Node3D"]
+
+[node name="ArmsMesh" parent="." instance=ExtResource("1_3vyb7")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 7.105428e-15, -8.742278e-08, -5.5848723e-08, 0.7693438, 0.638835, 6.725817e-08, 0.638835, -0.7693438, 0, 46.103146, -19.681183)
