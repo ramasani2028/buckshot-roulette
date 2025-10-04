@@ -4,7 +4,9 @@ extends Node
 
 func _ready():
 	get_viewport().set_embedding_subwindows(false) #important
+	
 	# Player 1
+	get_window().title = "Player 1"
 	var game1 = gameScene.instantiate()
 	add_child(game1)
 	game1.get_node("Player1/Camera3D").current = true
@@ -14,6 +16,7 @@ func _ready():
 	window2.size = Vector2(1152,648)
 	window2.visible = true
 	window2.position = Vector2(860, 340)
+	window2.title = "Player 2"
 	add_child(window2)
 	
 	var game2 = gameScene.instantiate()
