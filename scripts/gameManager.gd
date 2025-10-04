@@ -100,9 +100,6 @@ func getGameState() -> GameState:
 
 func shootPlayer(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	# logic for shooting
-	# reset callerPlayerRef power to 1 after each shot (handSaw might have been used)	
-	# also remove handcuff from player after their turn has been skipped (idk where to put this comment)
-	# maybe in endTurn(), keep skipping until it finds a player not handcuffed?
 	if(isUpgradeRnd):
 		return
 	if(callerPlayerRef != gameState.alivePlayers[currPlayerTurnIndex]):
@@ -185,7 +182,6 @@ func useMagGlass(callerPlayerRef: Player) -> void:
 
 func useHandcuff(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	targetPlayerRef.isHandcuffed = true
-	# set this back to false after turn skipped.
 
 func useExpiredMed(callerPlayerRef: Player) -> void:
 	if randi()%2:
@@ -205,7 +201,7 @@ func useBurnerPhone(callerPlayerRef: Player) -> void:
 		print(0) # play animation showing empty shell 
 	
 func useHandSaw(callerPlayerRef: Player) -> void:
-	callerPlayerRef.power = 2 # reset to 1 after shooting please
+	callerPlayerRef.power += 1
 	# also need to show gun being sawed off
 
 # will implement these upgrades after Prototype 1
