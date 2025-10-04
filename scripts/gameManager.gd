@@ -1,8 +1,8 @@
 extends Node
 
 # Initializing the game state
-var gameState: GameState = GameState.new([], [])
-var players: Array[Player] = []
+var gameState: GameState = null
+@onready var players: Array[Player] = []
 var currPlayerTurnIndex: int = 0 
 var shotgunShells: Array[int] = [] # 0 for blank, 1 for live
 var roundIndex: int = 0
@@ -21,6 +21,11 @@ func initMatch() -> void:
 	# as for UI changes and stuff best to have them as side effects of functions here i think.
 	roundIndex = 0
 	shotgunShellCount = 8
+	print(get_node("../Player1"))
+	players = [get_node("../Player1"), get_node("../Player2")]
+	print(players)
+	return;
+	gameState = GameState.new(players, [])
 	initRound()
 
 func initRound() -> void:
@@ -213,3 +218,6 @@ func useUnoRev(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 
 func useDisableUpgrade(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	pass
+	
+func _ready():
+	initMatch()  
