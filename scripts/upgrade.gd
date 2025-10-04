@@ -4,6 +4,6 @@ enum UpgradeType {cigarette, beer, magGlass, handcuff, expiredMed, inverter,
 				  burnerPhone, handSaw, adrenaline, disableUpgrade, unoRev, wildCard}
 
 var upgrade_type: UpgradeType
-
-func _init(type: UpgradeType):
-	upgrade_type = type
+var pos: Vector3 # ts is for players to get pos of
+# ts wasn't working when isntantiating so i removed _init
+	
