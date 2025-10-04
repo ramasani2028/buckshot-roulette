@@ -3,6 +3,7 @@ extends Node
 @export var gameScene: PackedScene
 
 func _ready():
+	get_viewport().set_embedding_subwindows(false)
 	# Player 1
 	var game1 = gameScene.instantiate()
 	add_child(game1)
@@ -10,8 +11,9 @@ func _ready():
 	
 	#Player 2
 	var window2 = Window.new()
-	window2.size = Vector2(800,800)
+	window2.size = Vector2(1152,648)
 	window2.visible = true
+	window2.position = Vector2(860, 340)
 	add_child(window2)
 	
 	var game2 = gameScene.instantiate()
