@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4prx7nk2xo4"]
+[gd_scene load_steps=10 format=3 uid="uid://c4prx7nk2xo4"]
 
 [ext_resource type="PackedScene" uid="uid://cqcldyqajw3yc" path="res://assets/buckshot_roulette_table_-_3d_model.glb" id="1_jn645"]
 [ext_resource type="PackedScene" uid="uid://lky204uemp8" path="res://scenes/gun.tscn" id="3_85yof"]
-[ext_resource type="Script" uid="uid://bv6skexvrv481" path="res://scripts/player.gd" id="3_ut7mc"]
 [ext_resource type="PackedScene" uid="uid://cn7iq23q16pu7" path="res://scenes/upgrade.tscn" id="4_jn645"]
 [ext_resource type="Script" uid="uid://drtpetyjiq1sf" path="res://scripts/gameManager.gd" id="4_jxe34"]
 [ext_resource type="PackedScene" uid="uid://bj53s6w12n7ya" path="res://scenes/player.tscn" id="6_eom3m"]
@@ -41,17 +40,15 @@ mesh = SubResource("PlaneMesh_ffxv4")
 
 [node name="Player1" parent="." instance=ExtResource("6_eom3m")]
 transform = Transform3D(-1.3113416e-09, 0, -0.03, 0, 0.03, 0, 0.03, 0, -1.3113416e-09, 3.3819137, 0.39279103, 4.446)
-script = ExtResource("3_ut7mc")
 
 [node name="Player2" parent="." instance=ExtResource("6_eom3m")]
 transform = Transform3D(-1.3113416e-09, 0, 0.03, 0, 0.03, 0, -0.03, 0, -1.3113416e-09, -2.615, 0.393, 4.435)
-script = ExtResource("3_ut7mc")
 
 [node name="Gun" parent="." instance=ExtResource("3_85yof")]
 transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, 0, 4.5)
 
 [node name="Upgrade" parent="." instance=ExtResource("4_jn645")]
-transform = Transform3D(-1.0927847e-08, 0, 0.25, 0, 0.25, 0, -0.25, 0, -1.0927847e-08, 1.9140401, 0, 5.3526034)
+transform = Transform3D(-1.0927847e-08, 0, 0.25, 0, 0.25, 0, -0.25, 0, -1.0927847e-08, 1.9140401, -4.867008, 5.3526034)
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("4_jxe34")
