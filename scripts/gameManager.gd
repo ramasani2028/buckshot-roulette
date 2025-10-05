@@ -1,7 +1,5 @@
 extends Node
 
-signal turn_ended(gameState, currPlayerTurnIndex)
-
 # Initializing the game state
 var gameState: GameState = null
 var upgradeScene: PackedScene = null
@@ -15,6 +13,7 @@ var minRealShots: int = 2
 var realShots: int = 0;
 var blanks: int = 0;
 var maxHP: int = 3 # temporary value
+var isUpgradeRnd : bool = false # false means players can shoot, true means its upgrade pickup round
 var table: Node3D = null;
 # Game Logic functions
 func initMatch() -> void:
@@ -26,9 +25,7 @@ func initMatch() -> void:
 	roundIndex = 1
 	shotgunShellCount = 8
 	players = [get_node("../Player1"), get_node("../Player2")]
-	for player in players:
-		self.turn_ended.connect(player.onTurnEnd)
-	gameState = GameState.new(players, [], false)
+	gameState = GameState.new(players, [])
 	table = get_node("../Table")
 	initRound()
 
@@ -45,7 +42,7 @@ func initRound() -> void:
 	blanks = shotgunShellCount - realShots
 	generateRandomBulletsOrder() # aka shuffle
 	if roundIndex != 0:
-		gameState.isUpgradeRound = true
+		isUpgradeRnd = true
 	currPlayerTurnIndex = randi() % gameState.alivePlayers.size()
 
 func endTurn() -> void:
@@ -56,11 +53,11 @@ func endTurn() -> void:
 	
 	currPlayerTurnIndex = (currPlayerTurnIndex + 1) % gameState.alivePlayers.size()
 	
-	if(gameState.isUpgradeRound):
+	if(isUpgradeRnd):
 		spawnUpgradesOnTable()
 		
-	if gameState.isUpgradeRound && gameState.upgradesOnTable.size() == 0:
-		gameState.isUpgradeRound = false
+	if isUpgradeRnd && gameState.upgradesOnTable.size() == 0:
+		isUpgradeRnd = false
 		currPlayerTurnIndex -= 1
 		if(currPlayerTurnIndex == -1):
 			currPlayerTurnIndex = gameState.alivePlayers.size() - 1
@@ -70,7 +67,6 @@ func endTurn() -> void:
 		# now here would probably be a good time to flash the number of reals and blanks
 		 
 	# once all turn loggic is done with, send a signal to all players to refetch gameState
-	turn_ended.emit(gameState, currPlayerTurnIndex)
 	
 	
 	# maybe we could allow players to use upgrades like handcuffs during the upgrade pickup sesh?
@@ -167,7 +163,7 @@ func getGameState() -> GameState:
 
 func shootPlayer(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 	# logic for shooting
-	if(gameState.isUpgradeRound):
+	if(isUpgradeRnd):
 		return
 	if(callerPlayerRef != gameState.alivePlayers[currPlayerTurnIndex]):
 		return # not ur goddamn turn
@@ -186,7 +182,7 @@ func shootPlayer(callerPlayerRef: Player, targetPlayerRef: Player) -> void:
 
 # call this when you want to pick an upgrade off of the upgrade table
 func pickUpUpgrade(callerPlayerRef: Player, upgradeRef: Upgrade) -> void:
-	if !gameState.isUpgradeRound:
+	if !isUpgradeRnd:
 		return
 	if(callerPlayerRef != gameState.alivePlayers[currPlayerTurnIndex]):
 		return # not ur goddamn turn
