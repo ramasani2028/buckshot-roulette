@@ -11,7 +11,7 @@ var current_target_index: int = 0
 var targets: Array = []
 var is_my_turn: bool = false
 var game_state: GameState = null
-
+ 
 func _init(_name: String = "Player", _hp: int = 3):
 	name = _name
 	hp = _hp
