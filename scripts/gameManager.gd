@@ -22,7 +22,7 @@ func initMatch() -> void:
 	# one this fumc is called though a continuous match SHOULD work.
 	# as for UI changes and stuff best to have them as side effects of functions here i think.
 	upgradeScene = preload("res://scenes/upgrade.tscn")
-	roundIndex = 0
+	roundIndex = 1
 	shotgunShellCount = 8
 	players = [get_node("../Player1"), get_node("../Player2")]
 	gameState = GameState.new(players, [])
@@ -145,6 +145,7 @@ func spawnUpgradesOnTable():
 	for i in range(gameState.upgradesOnTable.size()):
 		var upgradeInstance: Upgrade = upgradeScene.instantiate() as Upgrade
 		upgradeInstance.upgrade_type = gameState.upgradesOnTable[i].upgrade_type
+		upgradeInstance.get_node("Label3D").set_text(Upgrade.UpgradeType.keys()[upgradeInstance.upgrade_type])
 		var row = i/columns # how to disable stupid ass warning for int div
 		var col = i % columns
 		upgradeInstance.position = Vector3(startX + col * spacingX,  0.1, (startZ + row * spacingZ))
